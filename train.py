@@ -6,9 +6,9 @@ from data import create_dataset
 from models import create_model
 from util.visualizer import Visualizer
 
-# log_file = os.path.join(os.getcwd(), "boreas_snowy.out")   # 想放哪就改哪
-# sys.stdout = open(log_file, "w", buffering=1)               # 1=行缓冲，实时写盘
-# sys.stderr = sys.stdout
+log_file = os.path.join(os.getcwd(), "boreas_snowy.out")   # 想放哪就改哪
+sys.stdout = open(log_file, "w", buffering=1)               # 1=行缓冲，实时写盘
+sys.stderr = sys.stdout
 
 if __name__ == '__main__':
     opt = TrainOptions().parse()   # get training options
