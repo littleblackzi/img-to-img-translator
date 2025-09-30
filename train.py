@@ -84,3 +84,14 @@ if __name__ == '__main__':
 
         print('End of epoch %d / %d \t Time Taken: %d sec' % (epoch, opt.n_epochs + opt.n_epochs_decay, time.time() - epoch_start_time))
         model.update_learning_rate()                     # update learning rates at the end of every epoch.
+    import gc
+    # model.save_networks('latest')          # 最后再存一次
+    # model.eval()
+    with torch.no_grad():
+        torch.cuda.synchronize()           # 等所有流完成
+        del model                          # 删除网络
+        gc.collect()                       # 清 Python 垃圾
+        torch.cuda.empty_cache()           # 清显存池
+        torch.cuda.synchronize()           # 再同步一次
+    print('GPU context released.')
+
